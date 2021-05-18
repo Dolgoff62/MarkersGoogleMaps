@@ -1,0 +1,2 @@
+rootProject.name = "Markers GoogleMaps"
+include ':app'
