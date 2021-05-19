@@ -1,13 +1,10 @@
 <resources>
     <string name="app_name">Markers GoogleMaps</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="map_fragment_label">Map Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="main_fragment_label">My Markers</string>
+    <string name="map_fragment_label">Map</string>
     <string name="gps_not_allowed">You must give permission to use location</string>
-    <string name="main_fragment_label">Main fragment</string>
+    <string name="add_marker">add marker</string>
+    <string name="empty_posts">Nothing to show yet. You can swipe to refresh or add new marker.</string>
+    <string name="marker_logo">marker logo</string>
 </resources>

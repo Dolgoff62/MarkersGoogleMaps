@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:elevation="4dp"
+    android:padding="@dimen/cardview_default_elevation">
+
+    <ImageView
+        android:id="@+id/marker_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_spacing"
+        android:contentDescription="@string/marker_logo"
+        app:icon="@drawable/ic_baseline_adjust_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/ic_baseline_adjust_24" />
+
+    <TextView
+        android:id="@+id/marker_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_spacing"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/marker_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/marker_menu"
+        tools:text="Это чито такое? Новый маркер,
+        разве я был здесь?? И бла бла бла..." />
+
+    <TextView
+        android:id="@+id/published"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_spacing"
+        android:layout_marginEnd="@dimen/common_spacing"
+        android:textColor="@color/colorMediumGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/marker_logo"
+        app:layout_constraintTop_toBottomOf="@id/marker_description"
+        tools:text="12 сентября 2021 12:22" />
+
+    <Button
+        android:id="@+id/marker_menu"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="@dimen/common_spacing"
+        android:background="@android:color/transparent"
+        android:gravity="end"
+        app:icon="@drawable/ic_baseline_menu_24"
+        app:iconTint="@color/colorMediumGrey"
+        app:layout_constraintBottom_toBottomOf="@id/published"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

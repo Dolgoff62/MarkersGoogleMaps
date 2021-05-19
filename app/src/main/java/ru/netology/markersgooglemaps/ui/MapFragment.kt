@@ -1,6 +1,8 @@
 package ru.netology.markersgooglemaps
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +13,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.snackbar.Snackbar
 import ru.netology.markersgooglemaps.databinding.FragmentMapBinding
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.coroutineScope
+import com.google.android.gms.location.LocationServices
 import com.google.maps.android.ktx.awaitMap
 
 class MapFragment : Fragment() {
@@ -59,6 +63,31 @@ class MapFragment : Fragment() {
                     isZoomControlsEnabled = true
                     setAllGesturesEnabled(true)
                 }
+            }
+        }
+
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                googleMap.apply {
+                    isMyLocationEnabled = true
+                    uiSettings.isMyLocationButtonEnabled = true
+                }
+
+                val fusedLocationProviderClient = LocationServices
+                    .getFusedLocationProviderClient(requireActivity())
+
+                fusedLocationProviderClient.lastLocation.addOnSuccessListener {
+                    println(it)
+                }
+            }
+            shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
+                //TODO
+            }
+            else -> {
+                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
             }
         }
 
