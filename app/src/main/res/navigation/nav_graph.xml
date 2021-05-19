@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/main_fragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/main_fragment"
         android:name="ru.netology.markersgooglemaps.MapFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_map">
+        android:label="@string/main_fragment_label"
+        tools:layout="@layout/fragment_main">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/map_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="ru.netology.markersgooglemaps.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/map_fragment"
+        android:name="ru.netology.markersgooglemaps.MainFragment"
+        android:label="@string/map_fragment_label"
+        tools:layout="@layout/fragment_map">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/main_fragment" />
     </fragment>
 </navigation>

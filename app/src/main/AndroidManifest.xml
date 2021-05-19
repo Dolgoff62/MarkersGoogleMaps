@@ -20,7 +20,7 @@
             android:value="${mapsApiKey}" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".AppActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.MarkersGoogleMaps.NoActionBar">
             <intent-filter>
