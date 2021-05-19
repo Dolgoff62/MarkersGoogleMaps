@@ -20,7 +20,7 @@ import com.google.maps.android.ktx.awaitMap
 
 class MapFragment : Fragment() {
 
-    private lateinit var googleMap: GoogleMap
+    private var googleMap: GoogleMap? = null
 
     private val binding by lazy { FragmentMapBinding.inflate(layoutInflater) }
 
@@ -28,7 +28,7 @@ class MapFragment : Fragment() {
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                googleMap.apply {
+                googleMap?.apply {
                     isMyLocationEnabled = true
                     uiSettings.isMyLocationButtonEnabled = true
                 }
@@ -71,7 +71,7 @@ class MapFragment : Fragment() {
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED -> {
-                googleMap.apply {
+                googleMap?.apply {
                     isMyLocationEnabled = true
                     uiSettings.isMyLocationButtonEnabled = true
                 }
