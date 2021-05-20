@@ -8,21 +8,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.snackbar.Snackbar
 import ru.netology.markersgooglemaps.databinding.FragmentMapBinding
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.coroutineScope
 import com.google.android.gms.location.LocationServices
 import com.google.maps.android.ktx.awaitMap
+import ru.netology.markersgooglemaps.viewModel.MarkerViewModel
 
 class MapFragment : Fragment() {
 
     private var googleMap: GoogleMap? = null
 
     private val binding by lazy { FragmentMapBinding.inflate(layoutInflater) }
+
+    private val viewModel: MarkerViewModel by viewModels(
+        ownerProducer = ::requireParentFragment
+    )
 
     @SuppressLint("MissingPermission")
     private val requestPermissionLauncher =
@@ -91,5 +98,8 @@ class MapFragment : Fragment() {
             }
         }
 
+        viewModel.data.observe(viewLifecycleOwner, { state ->
+            
+        })
     }
 }
