@@ -9,4 +9,10 @@
     <string name="marker_logo">marker logo</string>
     <string name="menu_item_edit">Edit</string>
     <string name="menu_item_delete">Delete</string>
+    <string name="toast_empty_marker_list">You have not created any placemarks on the map yet. Try to do this by long tap on the desired map object.</string>
+    <string name="title">Title</string>
+    <string name="dialog_fragment_title">New Marker</string>
+    <string name="description">Description</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
 </resources>

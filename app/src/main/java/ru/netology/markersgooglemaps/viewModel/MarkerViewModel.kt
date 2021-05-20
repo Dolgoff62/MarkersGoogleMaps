@@ -41,7 +41,13 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
         edited.value = marker
     }
 
-    fun changeContent(id: Int, markerTitle: String, markerDescription: String) {
+    fun changeContent(
+        id: Int,
+        markerTitle: String,
+        markerDescription: String,
+        externalLatitude: Double,
+        externalLongitude: Double
+    ) {
         val title = markerTitle.trim()
         val description = markerDescription.trim()
         if (
@@ -53,7 +59,9 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
         edited.value = edited.value?.copy(
             id = id,
             markerTitle = title,
-            markerDescription = description
+            markerDescription = description,
+            latitude = externalLatitude,
+            longitude = externalLongitude
         )
     }
 }
