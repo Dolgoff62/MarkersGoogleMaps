@@ -8,6 +8,7 @@ import ru.netology.markersgooglemaps.dto.Marker
 import ru.netology.markersgooglemaps.model.FeedModel
 import ru.netology.markersgooglemaps.repository.MarkerRepository
 import ru.netology.markersgooglemaps.repository.MarkerRepositoryImpl
+import ru.netology.markersgooglemaps.utils.Utils
 import ru.netology.markersgooglemaps.utils.Utils.EmptyMarker.empty
 
 class MarkerViewModel(application: Application) : AndroidViewModel(application) {
@@ -60,6 +61,7 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
             id = id,
             markerTitle = title,
             markerDescription = description,
+            publishedDate = Utils.localDateTime(),
             latitude = externalLatitude,
             longitude = externalLongitude
         )

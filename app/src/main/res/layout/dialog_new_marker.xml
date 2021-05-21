@@ -1,76 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/common_spacing"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/common_spacing">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:padding="10dp"
+        android:background="@color/light_blue"
+        android:gravity="center"
         android:orientation="vertical"
-        android:background="#fff"
-        android:gravity="center">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/dialog_fragment_title"
-            android:textSize="32sp"
-            android:textAllCaps="true"
-            android:layout_marginTop="50dp"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:text="@string/dialog_fragment_title"
             android:textAlignment="center"
-            android:textColor="@color/dark_grey" />
+            android:textAllCaps="true"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp" />
 
 
         <EditText
             android:id="@+id/et_Title"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:autofillHints="Title"
             android:hint="@string/title"
-            android:imeOptions="actionNext"
-            android:inputType="text"
             android:maxLines="1" />
 
-        <EditText
-            android:id="@+id/et_Description"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:autofillHints="Title"
-            android:hint="@string/description"
-            android:imeOptions="actionDone"
-            android:inputType="textMultiLine" />
+        <ScrollView
+            android:id="@+id/sv_new_marker_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/et_Description"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:autofillHints="Title"
+                android:hint="@string/description" />
+        </ScrollView>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mb_new_marker_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/done"/>
+            android:text="@string/done" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mb_new_marker_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:backgroundTint="@color/red"
-            android:text="@string/cancel"/>
+            android:text="@string/cancel"
+            app:backgroundTint="@color/red" />
 
 
     </LinearLayout>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/iv_new_marker_logo"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_centerHorizontal="true"
+        android:layout_gravity="center|top"
         android:background="@xml/background_circle"
         android:padding="3dp"
-        android:src="@drawable/ic_new_marker_logo_rounded_48"/>
+        android:src="@drawable/ic_placeholder_64" />
 
 
 </RelativeLayout>

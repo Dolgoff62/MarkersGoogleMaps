@@ -20,7 +20,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.material.snackbar.Snackbar
 import com.google.maps.android.collections.MarkerManager
 import com.google.maps.android.ktx.awaitMap
 import com.google.maps.android.ktx.model.cameraPosition
@@ -49,11 +48,12 @@ class MapFragment : Fragment() {
                     uiSettings.isMyLocationButtonEnabled = true
                 }
             } else {
-                Snackbar.make(
-                    binding.root,
+                Toast.makeText(
+                    requireContext(),
                     getString(R.string.gps_not_allowed),
-                    Snackbar.LENGTH_LONG
+                    Toast.LENGTH_LONG
                 ).show()
+                return@registerForActivityResult
             }
         }
 
@@ -80,104 +80,107 @@ class MapFragment : Fragment() {
                     setAllGesturesEnabled(true)
                 }
             }
-        }
 
-        when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                googleMap.apply {
-                    isMyLocationEnabled = true
-                    uiSettings.isMyLocationButtonEnabled = true
-                }
 
-                val fusedLocationProviderClient = LocationServices
-                    .getFusedLocationProviderClient(requireActivity())
+            when {
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    googleMap.apply {
+                        this.isMyLocationEnabled = true
+                        uiSettings.isMyLocationButtonEnabled = true
+                    }
 
-                fusedLocationProviderClient.lastLocation.addOnSuccessListener {
-                    println(it)
-                }
-            }
-            shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
-                //TODO
-            }
-            else -> {
-                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-            }
-        }
+                    val fusedLocationProviderClient = LocationServices
+                        .getFusedLocationProviderClient(requireActivity())
 
-        viewModel.data.observe(viewLifecycleOwner, { state ->
-           if(state.markers.isEmpty()) {
-               Toast.makeText(
-                   requireContext(),
-                   R.string.toast_empty_marker_list,
-                   Toast.LENGTH_LONG
-               ).show()
-           }
-
-            val markerManager = MarkerManager(googleMap)
-            val icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_google_maps_marker_24)
-
-            val collection: MarkerManager.Collection = markerManager.newCollection().apply {
-                state.markers.forEach { marker ->
-                    addMarker {
-                        position(LatLng(marker.latitude, marker.longitude))
-                        icon(icon)
-                        title(marker.markerTitle)
-                        snippet(marker.markerDescription)
-                        infoWindowAnchor(0.5F, 0F)
+                    fusedLocationProviderClient.lastLocation.addOnSuccessListener {
+                        println(it)
                     }
                 }
-            }
-
-            collection.setOnMarkerClickListener { marker ->
-                marker.showInfoWindow()
-                true
-            }
-
-            val boundsBuilder = LatLngBounds.Builder()
-            if (state.markers.isNotEmpty()) {
-                state.markers.forEach { marker ->
-                    boundsBuilder.include(LatLng(marker.latitude, marker.longitude))
+                shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
+                    //TODO
                 }
-                val bounds = boundsBuilder.build()
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150))
+                else -> {
+                    requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+                }
             }
 
-            collection.setOnInfoWindowClickListener {
+            viewModel.data.observe(viewLifecycleOwner, { state ->
+                if (state.markers.isEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        R.string.toast_empty_marker_list,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+                val markerManager = MarkerManager(googleMap)
+                val icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_google_maps_marker_24)
+
+                val collection: MarkerManager.Collection = markerManager.newCollection().apply {
+                    state.markers.forEach { marker ->
+                        addMarker {
+                            position(LatLng(marker.latitude, marker.longitude))
+                            icon(icon)
+                            title(marker.markerTitle)
+                            snippet(marker.markerDescription)
+                            infoWindowAnchor(0.5F, 0F)
+                        }
+                    }
+                }
+
+                collection.setOnMarkerClickListener { marker ->
+                    marker.showInfoWindow()
+                    true
+                }
+
+                val boundsBuilder = LatLngBounds.Builder()
+                if (state.markers.isNotEmpty()) {
+                    state.markers.forEach { marker ->
+                        boundsBuilder.include(LatLng(marker.latitude, marker.longitude))
+                    }
+                    val bounds = boundsBuilder.build()
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150))
+                }
+
+                collection.setOnInfoWindowClickListener {
+                    googleMap.moveCamera(
+                        CameraUpdateFactory.newCameraPosition(
+                            cameraPosition {
+                                target(it.position)
+                                zoom(15F)
+                            }
+                        )
+                    )
+                }
+            })
+
+            googleMap.setOnMapLongClickListener { point ->
+                NewMarkerDialogFragment(point.latitude, point.longitude)
+                    .show(childFragmentManager, NewMarkerDialogFragment.TAG)
+            }
+
+            val coordinatesString = arguments?.textArg?.split(",")?.toTypedArray()
+
+            val coordinates = coordinatesString?.get(0)?.let {
+                LatLng(it.toDouble(), coordinatesString[1].toDouble())
+            }
+
+            if (coordinates != null) {
                 googleMap.moveCamera(
                     CameraUpdateFactory.newCameraPosition(
                         cameraPosition {
-                            target(it.position)
+                            target(coordinates)
                             zoom(15F)
                         }
                     )
                 )
             }
-        })
-
-        googleMap.setOnMapClickListener { point ->
-            NewMarkerDialogFragment(point.latitude, point.longitude)
-                .show(childFragmentManager, NewMarkerDialogFragment.TAG)
-        }
-
-        val coordinatesString = arguments?.textArg?.split(",")?.toTypedArray()
-
-        val coordinates = coordinatesString?.get(0)?.let {
-            LatLng(it.toDouble(), coordinatesString[1].toDouble())
-        }
-
-        if (coordinates != null) {
-            googleMap.moveCamera(
-                CameraUpdateFactory.newCameraPosition(
-                    cameraPosition {
-                        target(coordinates)
-                        zoom(15F)
-                    }
-                ))
         }
     }
+
     companion object {
         var Bundle.textArg: String? by Utils.StringArg
     }

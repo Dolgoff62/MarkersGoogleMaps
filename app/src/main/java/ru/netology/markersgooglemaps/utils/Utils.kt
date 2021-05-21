@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import ru.netology.markersgooglemaps.dto.Marker
+import java.util.*
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -35,6 +36,14 @@ class Utils {
             val imm =
                 view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+
+        fun localDateTime(): String {
+            val year: Date = Calendar.getInstance().time
+//            val current = LocalDateTime.now()
+//            val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy в HH:mm")
+//            return current.format(formatter).toString()
+            return year.toString()
         }
     }
 }

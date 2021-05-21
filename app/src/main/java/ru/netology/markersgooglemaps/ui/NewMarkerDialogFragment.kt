@@ -1,10 +1,11 @@
 package ru.netology.markersgooglemaps.ui
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import ru.netology.markersgooglemaps.databinding.DialogNewMarkerBinding
@@ -27,9 +28,10 @@ class NewMarkerDialogFragment(
     override fun onStart() {
         super.onStart()
          dialog?.window?.setLayout(
-             WindowManager.LayoutParams.MATCH_PARENT,
-             WindowManager.LayoutParams.WRAP_CONTENT
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
          )
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
     override fun onCreateView(
