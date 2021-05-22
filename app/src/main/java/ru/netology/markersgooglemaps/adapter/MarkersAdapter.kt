@@ -37,7 +37,8 @@ class MarkersAdapter(
 
         fun bind(marker: Marker) {
             binding.apply {
-                markerDescription.text = marker.markerDescription
+                markerLogo
+                markerTitle.text = marker.markerTitle
                 published.text = marker.publishedDate
 
                 markerMenu.setOnClickListener {
@@ -58,7 +59,7 @@ class MarkersAdapter(
                         }
                     }.show()
                 }
-                markerDescription.setOnClickListener {
+                markerGroup.setOnClickListener {
                     onItemClickListener.onMarker(marker)
                 }
             }

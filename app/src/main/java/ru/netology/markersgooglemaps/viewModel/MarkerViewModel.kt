@@ -23,6 +23,20 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
 
     val edited = MutableLiveData(empty)
 
+    init {
+        loadMarkers()
+    }
+
+    fun loadMarkers() = viewModelScope.launch {
+        try {
+            _dataState.value = FeedModel(refreshing = true)
+            repository.data
+            _dataState.value = FeedModel()
+        } catch (e: Exception) {
+            _dataState.value = FeedModel(error = true)
+        }
+    }
+
     fun saveMarker() {
         edited.value?.let {
             viewModelScope.launch {

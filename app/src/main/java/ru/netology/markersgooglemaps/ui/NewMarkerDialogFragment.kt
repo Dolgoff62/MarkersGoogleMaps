@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import ru.netology.markersgooglemaps.R
 import ru.netology.markersgooglemaps.databinding.DialogNewMarkerBinding
 import ru.netology.markersgooglemaps.utils.Utils
 import ru.netology.markersgooglemaps.viewModel.MarkerViewModel
@@ -50,19 +52,26 @@ class NewMarkerDialogFragment(
         }
 
         binding.mbNewMarkerConfirm.setOnClickListener {
-            if (binding.etTitle.text.isNotEmpty()) {
-                viewModel.run {
-                    changeContent(
-                        id = 0,
-                        markerTitle = binding.etTitle.text.toString(),
-                        markerDescription = binding.etDescription.text.toString(),
-                        externalLatitude = externalLatitude,
-                        externalLongitude = externalLongitude
-                    )
-                    saveMarker()
-                    Utils.hideKeyboard(requireView())
-                }
+            if (binding.etTitle.text.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.empty_title_warning),
+                    Toast.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
             }
+            viewModel.run {
+                changeContent(
+                    id = 0,
+                    markerTitle = binding.etTitle.text.toString(),
+                    markerDescription = binding.etDescription.text.toString(),
+                    externalLatitude = externalLatitude,
+                    externalLongitude = externalLongitude
+                )
+                saveMarker()
+                Utils.hideKeyboard(requireView())
+            }
+
             dismiss()
         }
         return binding.root
