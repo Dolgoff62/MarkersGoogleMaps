@@ -40,15 +40,21 @@ class MainFragment : Fragment() {
         val adapter = MarkersAdapter(object : OnItemClickListener {
 
             override fun onMarker(marker: Marker) {
-
+                val bundle = Bundle().apply {
+                    putParcelable("marker", marker)
+                }
+                findNavController().navigate(R.id.action_nav_main_to_nav_marker, bundle)
             }
 
             override fun onEdit(marker: Marker) {
-
+                val bundle = Bundle().apply {
+                    putParcelable("marker", marker)
+                }
+                findNavController().navigate(R.id.action_nav_main_to_nav_edit, bundle)
             }
 
             override fun onDelete(marker: Marker) {
-
+                viewModel.deleteMarker(marker.id)
             }
 
         })

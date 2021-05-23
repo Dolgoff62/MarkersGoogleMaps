@@ -7,7 +7,8 @@
     android:layout_height="100dp"
     android:orientation="horizontal"
     android:elevation="4dp"
-    android:padding="@dimen/cardview_default_elevation">
+    android:padding="@dimen/common_spacing"
+    android:background="@drawable/layout_back">
 
     <ImageView
         android:id="@+id/marker_logo"
@@ -47,12 +48,6 @@
         app:layout_constraintStart_toEndOf="@+id/marker_logo"
         app:layout_constraintTop_toBottomOf="@id/marker_title"
         tools:text="12 сентября 2021 12:22" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/marker_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="marker_logo, marker_title, published"/>
 
     <Button
         android:id="@+id/marker_menu"

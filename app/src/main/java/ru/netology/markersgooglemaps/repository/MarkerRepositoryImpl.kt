@@ -19,14 +19,6 @@ class MarkerRepositoryImpl(private val dao: MarkersDao) : MarkerRepository {
         }
     }
 
-    override suspend fun updateMarker(marker: Marker) {
-        try {
-
-        } catch (e: Exception) {
-            UnknownError
-        }
-    }
-
     override suspend fun deleteMarker(id: Int) {
         try {
             dao.deleteById(id)

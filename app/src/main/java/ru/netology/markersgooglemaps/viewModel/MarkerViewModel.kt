@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import ru.netology.markersgooglemaps.db.AppDb
-import ru.netology.markersgooglemaps.dto.Marker
 import ru.netology.markersgooglemaps.model.FeedModel
 import ru.netology.markersgooglemaps.repository.MarkerRepository
 import ru.netology.markersgooglemaps.repository.MarkerRepositoryImpl
@@ -52,10 +51,6 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
         edited.value = empty
     }
 
-    fun updateMarker(marker: Marker) {
-        edited.value = marker
-    }
-
     fun changeContent(
         id: Int,
         markerTitle: String,
@@ -79,5 +74,20 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
             latitude = externalLatitude,
             longitude = externalLongitude
         )
+    }
+
+    fun deleteMarker(id:Int) {
+        edited.value?.let {
+            viewModelScope.launch {
+                try {
+                    _dataState.value = FeedModel(loading = true)
+                    repository.deleteMarker(id)
+                    _dataState.value = FeedModel()
+                } catch (e: Exception) {
+                    _dataState.value = FeedModel(error = true)
+                }
+            }
+        }
+        edited.value = empty
     }
 }

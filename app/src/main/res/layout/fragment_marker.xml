@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/common_spacing">
+
+
+    <TextView
+        android:id="@+id/marker_fragment_created"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_dialog_fragment_title"
+        android:textAlignment="center"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_marker_logo" />
+
+    <Button
+        android:id="@+id/marker_menu"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="@dimen/common_spacing"
+        android:background="@android:color/transparent"
+        android:gravity="end"
+        app:icon="@drawable/ic_baseline_menu_24"
+        app:iconTint="@color/colorMediumGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/et_marker_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:maxLines="1"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/marker_fragment_created" />
+
+
+    <TextView
+        android:id="@+id/et_marker_Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:hint="@string/description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_marker_Title" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mb_marker_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exit"
+        app:backgroundTint="@color/red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/iv_marker_logo"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center|top"
+        android:background="@xml/background_circle"
+        android:padding="3dp"
+        android:src="@drawable/ic_maps_48"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

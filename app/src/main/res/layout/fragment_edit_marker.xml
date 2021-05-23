@@ -9,17 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:background="@color/light_blue"
+        android:background="@color/white"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/dialog_fragment_title"
+            android:id="@+id/edit_dialog_fragment_title"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="@string/dialog_fragment_title"
+            android:text="@string/edit_dialog_fragment_title"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/dark_grey"
@@ -27,7 +27,7 @@
 
 
         <EditText
-            android:id="@+id/et_Title"
+            android:id="@+id/et_edit_Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -36,12 +36,12 @@
             android:maxLines="1" />
 
         <ScrollView
-            android:id="@+id/sv_new_marker_description"
+            android:id="@+id/sv_edit_marker_description"
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
             <EditText
-                android:id="@+id/et_Description"
+                android:id="@+id/et_edit_Description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Title"
@@ -49,14 +49,14 @@
         </ScrollView>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/mb_new_marker_confirm"
+            android:id="@+id/mb_edit_marker_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/done" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/mb_new_marker_cancel"
+            android:id="@+id/mb_edit_marker_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -67,14 +67,14 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/iv_new_marker_logo"
+        android:id="@+id/iv_edit_marker_logo"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center|top"
         android:background="@xml/background_circle"
         android:padding="3dp"
-        android:src="@drawable/ic_placeholder_64" />
+        android:src="@drawable/ic_pen_640" />
 
 
 </RelativeLayout>

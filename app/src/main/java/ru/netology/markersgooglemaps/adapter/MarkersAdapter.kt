@@ -59,7 +59,10 @@ class MarkersAdapter(
                         }
                     }.show()
                 }
-                markerGroup.setOnClickListener {
+                markerTitle.setOnClickListener {
+                    onItemClickListener.onMarker(marker)
+                }
+                published.setOnClickListener {
                     onItemClickListener.onMarker(marker)
                 }
             }
