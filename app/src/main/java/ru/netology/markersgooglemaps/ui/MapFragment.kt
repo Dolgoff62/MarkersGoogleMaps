@@ -170,7 +170,7 @@ class MapFragment : Fragment() {
                     CameraUpdateFactory.newCameraPosition(
                         cameraPosition {
                             target(coordinates)
-                            zoom(10F)
+                            zoom(15F)
                         }
                     )
                 )

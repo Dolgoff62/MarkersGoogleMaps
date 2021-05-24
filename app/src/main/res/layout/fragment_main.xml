@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/empty_List"
-        android:layout_width="409dp"
-        android:layout_height="36dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/empty_posts"
         android:textAlignment="center"
         android:visibility="visible"

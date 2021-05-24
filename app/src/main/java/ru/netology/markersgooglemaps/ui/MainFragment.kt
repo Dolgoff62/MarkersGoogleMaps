@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
+import ru.netology.markersgooglemaps.MapFragment.Companion.textArg
 import ru.netology.markersgooglemaps.adapter.MarkersAdapter
 import ru.netology.markersgooglemaps.adapter.OnItemClickListener
 import ru.netology.markersgooglemaps.databinding.FragmentMainBinding
@@ -39,11 +40,20 @@ class MainFragment : Fragment() {
 
         val adapter = MarkersAdapter(object : OnItemClickListener {
 
-            override fun onMarker(marker: Marker) {
+            override fun onMarkerContent(marker: Marker) {
                 val bundle = Bundle().apply {
                     putParcelable("marker", marker)
                 }
                 findNavController().navigate(R.id.action_nav_main_to_nav_marker, bundle)
+            }
+
+            override fun onMarkerLogo(marker: Marker) {
+                val coordinates = "${marker.latitude},${marker.longitude}"
+                findNavController().navigate(
+                    R.id.action_MainFragment_to_MapFragment,
+                    Bundle().apply {
+                        textArg = coordinates
+                    })
             }
 
             override fun onEdit(marker: Marker) {

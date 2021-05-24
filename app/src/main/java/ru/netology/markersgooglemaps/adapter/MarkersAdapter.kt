@@ -11,7 +11,8 @@ import ru.netology.markersgooglemaps.databinding.MarkerCardBinding
 import ru.netology.markersgooglemaps.dto.Marker
 
 interface OnItemClickListener {
-    fun onMarker(marker: Marker) {}
+    fun onMarkerContent(marker: Marker) {}
+    fun onMarkerLogo(marker: Marker) {}
     fun onEdit(marker: Marker) {}
     fun onDelete(marker: Marker) {}
 }
@@ -60,10 +61,13 @@ class MarkersAdapter(
                     }.show()
                 }
                 markerTitle.setOnClickListener {
-                    onItemClickListener.onMarker(marker)
+                    onItemClickListener.onMarkerContent(marker)
                 }
                 published.setOnClickListener {
-                    onItemClickListener.onMarker(marker)
+                    onItemClickListener.onMarkerContent(marker)
+                }
+                markerLogo.setOnClickListener {
+                    onItemClickListener.onMarkerLogo(marker)
                 }
             }
         }
