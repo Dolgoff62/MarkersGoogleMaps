@@ -42,6 +42,9 @@
         android:name="ru.netology.markersgooglemaps.ui.MarkerFragment"
         android:label="@string/marker"
         tools:layout="@layout/fragment_marker">
+        <action
+            android:id="@+id/action_nav_marker_to_nav_edit"
+            app:destination="@id/nav_edit" />
     </fragment>
 
 

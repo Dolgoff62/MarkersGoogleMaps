@@ -1,6 +1,7 @@
 package ru.netology.markersgooglemaps.utils
 
 import android.content.Context
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -39,11 +40,11 @@ class Utils {
         }
 
         fun localDateTime(): String {
-            val year: Date = Calendar.getInstance().time
-//            val current = LocalDateTime.now()
-//            val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy в HH:mm")
-//            return current.format(formatter).toString()
-            return year.toString()
+
+            val calendar = Calendar.getInstance()
+            val format = SimpleDateFormat("d MMMM yyyy, h:mm a", Locale.getDefault())
+
+            return format.format(calendar.getTime())
         }
     }
 }

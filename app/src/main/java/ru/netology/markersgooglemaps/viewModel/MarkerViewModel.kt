@@ -83,6 +83,10 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
                     _dataState.value = FeedModel(loading = true)
                     repository.deleteMarker(id)
                     _dataState.value = FeedModel()
+                    if (data.value?.markers?.isNullOrEmpty() == true) {
+                        _dataState.value = FeedModel(empty = true)
+                    }
+
                 } catch (e: Exception) {
                     _dataState.value = FeedModel(error = true)
                 }

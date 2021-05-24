@@ -75,7 +75,9 @@ class MainFragment : Fragment() {
 
         viewModel.data.observe(viewLifecycleOwner, { state ->
             adapter.submitList(state.markers)
-            binding.emptyList.isVisible = state.empty
+            binding.emptyList.isVisible = state.markers.isNullOrEmpty()
+            binding.ivEmptyList.isVisible = state.markers.isNullOrEmpty()
+            binding.icFinger.isVisible = state.markers.isNullOrEmpty()
         })
 
         binding.fabAddNewMarker.setOnClickListener {

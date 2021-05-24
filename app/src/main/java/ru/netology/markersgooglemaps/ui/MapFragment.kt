@@ -24,7 +24,6 @@ import com.google.maps.android.collections.MarkerManager
 import com.google.maps.android.ktx.awaitMap
 import com.google.maps.android.ktx.model.cameraPosition
 import com.google.maps.android.ktx.utils.collection.addMarker
-import ru.netology.markersgooglemaps.databinding.FragmentMapBinding
 import ru.netology.markersgooglemaps.ui.NewMarkerDialogFragment
 import ru.netology.markersgooglemaps.utils.Utils
 import ru.netology.markersgooglemaps.viewModel.MarkerViewModel
@@ -32,8 +31,6 @@ import ru.netology.markersgooglemaps.viewModel.MarkerViewModel
 class MapFragment : Fragment() {
 
     private lateinit var googleMap: GoogleMap
-
-    private val binding by lazy { FragmentMapBinding.inflate(layoutInflater) }
 
     private val viewModel: MarkerViewModel by viewModels(
         ownerProducer = ::requireParentFragment
